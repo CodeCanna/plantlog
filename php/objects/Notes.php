@@ -12,8 +12,20 @@ class Notes extends Problems
         "p" => 0.0,
         "k" => 0.0
     );
-    protected Problems $problems;
 
+    /**
+     * @param bool $isFlowering
+     * @param bool $isFruiting
+     * @param int $numberOfFruits
+     * @param string $fertilizerUsed
+     * @param float $fertilizerWeight
+     * @param array $npk (Nitroget Phosophorus Potassium)
+     * @param string $problemName
+     * @param bool $isTreatable
+     * @param string $research
+     * @param string $treatmentsTried
+     * @param string $treatmentsFound
+     */
     public function __construct(
         bool $isFlowering,
         bool $isFruiting,
@@ -21,16 +33,29 @@ class Notes extends Problems
         string $fertilizerUsed,
         float $fertilizerWeight,
         array $npk,
-        Problems $problems
+        string $problemName,
+        bool $isTreatable,
+        string $research,
+        string $treatmentsTried,
+        string $treatmentsFound
+        
     )
     {
-        $this->isFlowering = $isFlowering;
-        $this->isFruiting = $isFruiting;
-        $this->numberOfFruits = $numberOfFruits;
-        $this->fertilizerUsed = $fertilizerUsed;
-        $this->fertilizerWeight = $fertilizerWeight;
-        $this->npk = $npk;
-        $this->problems = $problems;
+        $this->setIsFlowering($isFlowering);
+        $this->setIsFruiting($isFruiting);
+        $this->setNumberOfFruits($numberOfFruits);
+        $this->setFertilizerUsed($fertilizerUsed);
+        $this->setFertilizerWeight($fertilizerWeight);
+        $this->setNPK($npk);
+        
+        // Construct our parent class
+        parent::__construct(
+            $problemName,
+            $isTreatable,
+            $research,
+            $treatmentsTried,
+            $treatmentsFound
+        );
     }
 
     
@@ -99,5 +124,7 @@ class Notes extends Problems
     {
         $this->npk = $npk;
     }
+
+    // Problems
 }
 ?>
