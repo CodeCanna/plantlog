@@ -1,0 +1,9 @@
+div#display {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#newlog-form {
+    background-color: white;
+}

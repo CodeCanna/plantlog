@@ -1,0 +1,20 @@
+Plant Name
+Date and Time
+Days since last check
+Days since last fertilized
+    Fertilizer Used
+    How much used?
+Notes
+    Progress
+        Is It Flowering?
+        Fruiting?
+            Is it Fruiting?
+            How many fruits
+    Problems
+        Identify Problem
+            Fixable?
+                Research Treatments
+                    Treatments Tried
+            Not Fixable?
+                What is Plant of Action?
+Images
