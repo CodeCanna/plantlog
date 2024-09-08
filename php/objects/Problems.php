@@ -61,7 +61,7 @@ class Problems
         return $this->treatmentsTried;
     }
     
-    public function setTreatmentsTried()
+    public function setTreatmentsTried(string $treatmentsTried)
     {
         $this->treatmentsTried = $treatmentsTried;
     }
@@ -72,7 +72,7 @@ class Problems
         return $this->treatmentsFound;
     }
     
-    public function setTreatmentsFound()
+    public function setTreatmentsFound(string $treatmentsFound)
     {
         $this->treatmentsFound = $treatmentsFound;
     }

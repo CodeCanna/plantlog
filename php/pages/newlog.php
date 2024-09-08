@@ -1,6 +1,6 @@
 <h1>New Log!</h1>
 <section id="newlog-header">
-    <form id="newlog-form" method="post action="/php/pages/createlog.php">
+    <form id="newlog-form" action="/php/pages/createlog.php">
         <label for="plantname">*Plant Name:</label><br>
         <input type="text" id="plant-name" name="plantname" required><br>
         <label for="log-date-time">Date:</label><br>
@@ -41,10 +41,4 @@
         <input type="file" id="images" name="images" multiple="multiple">
         <button type="submit">Create Log</button>
     </form>
-    <script>
-        let fertilizerForm = document.getElementById("fertilizer-form");
-        let fertilizerRadioButtons = { yes: document.getElementById("ferilize-yes"), no: document.getElementById("fertilize-no") };
-
-        console.log(fertilizerRadioButtons.yes);
-    </script>
 </section>

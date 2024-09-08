@@ -124,7 +124,5 @@ class Notes extends Problems
     {
         $this->npk = $npk;
     }
-
-    // Problems
 }
 ?>
