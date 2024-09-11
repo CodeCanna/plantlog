@@ -27,4 +27,4 @@ Images
 Right before object storage we can pull the date of the last log that ways made, and compare to the current date.  We will have to do math to figure out how any days have gone by.  If too much time has gone by (I.E. Past the time that is set.) an email will be sent reminding to check plants.
 
 * Last fertilized days:
-Since some plants need less fertilizer than others we need to go by the actual Last Fertilized date and not the date of the last log.  We can take just the last fertilized date from the last log made and do a math operation to figure out the days, and like above if the number of days exceeds the set number of days a reminder email will be sent out.
+Since some plants need less fertilizer than others we need to go by the actual Last Fertilized date and not the date of the last log.  We can take just the last fertilized date from the last log made and do a math operation to figure out the days, and like above if the number of days exceeds the set number of days a reminder email will be sent out.  The method to do this is date_diff() or DateTime::diff().  This method takes two date times and returns the difference in a DateInterval object.
