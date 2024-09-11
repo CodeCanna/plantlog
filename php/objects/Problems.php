@@ -23,7 +23,7 @@ class Problems
     }
     
     // $name //
-    public function getName(): string
+    public function getProblemName(): string
     {
         return $this->name;
     }

@@ -9,13 +9,15 @@
     <h1>Create Log Page</h1>
     <?php
     require_once(dirname(__DIR__, 2) . "/php/objects/Log.php");
-
+    require_once(dirname(__DIR__, 2) . "/php/lib/rb.php");
     use Log;
 
     try {
         $log = new Log(
             "Beans",
             new DateTime(),
+            30,
+            60,
             array("image1" => "beans", "image2" => "beans"),
             "Rust",
             false,
@@ -34,9 +36,31 @@
             )
         );
 
-        echo var_dump($log);
+        var_dump($log);
+        R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
+        $logBean = R::dispense('log');
+
+        // Set properties
+        $logBean->plantName = $log->getPlantName();
+        $logBean->logDate = $log->getLogDate();
+        $logBean->lastCheckedDays = $log->getLastCheckedDays();
+        $logBean->lastFertilizedDays = $log->getLastFertilizedDays();
+        $logBean->images = $log->getImages();
+        $logBean->problemName = $log->getProblemName();
+        $logBean->isTreatable = $log->getIsTreatable();
+        $logBean->research = $log->getResearch();
+        $logBean->treatmentsTried = $log->getTreatmentsTried();
+        $logBean->treatmentsFound = $log->getTreatmentsFound();
+        $logBean->isFlowering = $log->getIsFlowering();
+        $logBean->isFruiting = $log->getIsFruiting();
+        $logBean->numberOfFruits = $log->getNumberOfFruits();
+        $logBean->fertilizerUsed = $log->getFertilizerUsed();
+        $logBean->fertilizerWeight = $log->getFertilizerWeight();
+        $logBean->npk = $log->getNPK();
+
+        $id = R::store($logBean);
     } catch (Exception $e) {
-        echo "OOPS";
+        echo $e;
     }
     ?>
 </body>

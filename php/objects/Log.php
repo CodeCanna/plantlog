@@ -12,15 +12,15 @@ class Log extends Notes
     /**
      * @param string $plantName
      * @param DateTime $logDate
-     * @param int $lastCheckedDays
+     * @param int $lastCheckedDays // This is going to be for statistics not reminders.
      * @param int $lastFertilizedDays
      * @param array $images
      */
     public function __construct(
         string $plantName,
         DateTime $logDate,
-        // int $lastCheckedDays,
-        // int $lastFertilizedDays,
+        int $lastCheckedDays,
+        int $lastFertilizedDays,
         array $images,
         // Problems //
         string $problemName,
@@ -38,9 +38,10 @@ class Log extends Notes
     ) {
         $this->setPlantName($plantName);
         $this->setLogDate($logDate);
-        //$this->setLastCheckedDays($lastCheckedDays);
+        $this->setLastCheckedDays($lastCheckedDays);
         $this->setImages($images);
 
+        // Notes.php constructor //
         parent::__construct(
             $isFlowering,
             $isFruiting,
@@ -89,6 +90,15 @@ class Log extends Notes
     public function setLastCheckedDays(int $lastCheckedDays)
     {
         $this->lastCheckedDays = $lastCheckedDays;
+    }
+
+    // Last Fertilized Days //
+    public function getLastFertilizedDays(): int {
+        return $this->lastFertilizedDays;
+    }
+
+    public function setLastFertilizedDays(int $lastFertilizedDays) {
+        $this->lastFertilizedDays = $lastFertilizedDays;
     }
 
     // $images //
