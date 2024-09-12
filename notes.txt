@@ -28,3 +28,5 @@ Right before object storage we can pull the date of the last log that ways made,
 
 * Last fertilized days:
 Since some plants need less fertilizer than others we need to go by the actual Last Fertilized date and not the date of the last log.  We can take just the last fertilized date from the last log made and do a math operation to figure out the days, and like above if the number of days exceeds the set number of days a reminder email will be sent out.  The method to do this is date_diff() or DateTime::diff().  This method takes two date times and returns the difference in a DateInterval object.
+
+http://localhost:8080/php/pages/createlog.php?plantname=Myster+Beans&log-date-time=2024-09-11T04%3A04&did-fertilize=false&problem-name=&research=&treatments-tried=&treatments-found=&images=plant3.jpg&images=plant2.jpg&images=plant1.jpg
