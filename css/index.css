@@ -12,3 +12,11 @@ footer a {
     margin: 1rem 5rem;
     text-align: center;
 }
+
+#fertilize-yes:checked ~ #fertilizer-form {
+    display: block;
+}
+
+#fertilize-no:checked ~ #fertilizer-form {
+    display: none;
+}
