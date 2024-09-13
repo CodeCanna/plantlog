@@ -24,9 +24,12 @@
             </li>
         </ul>
     </nav>
-    <div id="display">
+    <main id="display">
         <?php echo "Hello, World!"; ?>
-    </div>
+    </main>
+    <footer style="text-align: center;">
+        <a href="#">Edit</a><a href="#">Search</a><a href="#">Delete</a>
+    </footer>
     <script src="/js/index.js"></script>
 </body>
 
