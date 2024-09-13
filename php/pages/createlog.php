@@ -13,51 +13,57 @@
     use Log;
 
     try {
+        //echo var_dump($_POST) . "\n";
+        echo var_dump($_FILES["images"]["name"]) . "\n";
+
+        foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
+            move_uploaded_file($tmpName, "/home/awesomepilot/plantlog/" . $_FILES["images"]["name"][$image]);
+        }
         // Form Values
-        echo $_GET["plantname"];
-        echo $_GET["log-date-time"];
-        echo $_GET["did-fertilize"];
-        echo $_GET["fertilizer-used"];
-        echo $_GET["fertilizer-weight"];
-        echo $_GET["fertilizer-n"];
-        echo $_GET["fertilizer-p"];
-        echo $_GET["fertilizer-k"];
-        echo $_GET["problem-name"];
-        echo $_GET["treatable"];
-        echo $_GET["treatments-tried"];
-        echo $_GET["treatments-found"];
-        echo $_GET["research"];
-        echo $_GET["is-flowering"];
-        echo $_GET["is-fruiting"];
-        echo $_GET["images"];
-        echo $_GET["number-of-fruits"];
+        // echo $_GET["plantname"];
+        // echo $_GET["log-date-time"];
+        // echo $_GET["did-fertilize"];
+        // echo $_GET["fertilizer-used"];
+        // echo $_GET["fertilizer-weight"];
+        // echo $_GET["fertilizer-n"];
+        // echo $_GET["fertilizer-p"];
+        // echo $_GET["fertilizer-k"];
+        // echo $_GET["problem-name"];
+        // echo $_GET["treatable"];
+        // echo $_GET["treatments-tried"];
+        // echo $_GET["treatments-found"];
+        // echo $_GET["research"];
+        // echo $_GET["is-flowering"];
+        // echo $_GET["is-fruiting"];
+        // echo $_GET["images"];
+        // echo $_GET["number-of-fruits"];
 
-        $npk = array(
-            "n" => $_GET["fertilizer-n"],
-            "p" => $_GET["fertilizer-p"],
-            "k" => $_GET["fertilizer-k"]
-        );
+        // $npk = array(
+        //     "n" => $_GET["fertilizer-n"],
+        //     "p" => $_GET["fertilizer-p"],
+        //     "k" => $_GET["fertilizer-k"]
+        // );
 
-        $log = new Log(
-            $_GET["plantname"],
-            new DateTime(),
-            30,
-            20,
-            $_GET["images"],
-            $_GET["problem-name"],
-            $_GET["treatable"],
-            $_GET["research"],
-            $_GET["treatments-tried"],
-            $_GET["treatments-found"],
-            $_GET["is-flowering"],
-            $_GET["is-fruiting"],
-            $_GET["number-of-fruits"],
-            $_GET["fertilizer-used"],
-            $_GET["fertilizer-weight"],
-            $npk
-        );
+        // $log = new Log(
+        //     $_GET["plantname"],
+        //     new DateTime(),
+        //     30,
+        //     20,
+        //     $_GET["images"],
+        //     $_GET["problem-name"],
+        //     $_GET["treatable"],
+        //     $_GET["research"],
+        //     $_GET["treatments-tried"],
+        //     $_GET["treatments-found"],
+        //     $_GET["is-flowering"],
+        //     $_GET["is-fruiting"],
+        //     $_GET["number-of-fruits"],
+        //     $_GET["fertilizer-used"],
+        //     $_GET["fertilizer-weight"],
+        //     $npk
+        // );
 
-        echo var_dump($log);
+        // echo var_dump($log);
         //R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
         //$logBean = R::dispense('log');
 

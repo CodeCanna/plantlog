@@ -1,8 +1,8 @@
 <h1>New Log!</h1>
 <section id="newlog-header">
-    <form id="newlog-form" action="/php/pages/createlog.php">
+    <form id="newlog-form" method="post" action="/php/pages/createlog.php" enctype="multipart/form-data">
         <label for="plantname">*Plant Name:</label><br>
-        <input type="text" id="plant-name" name="plantname" required><br>
+        <input type="text" id="plant-name" name="plantname"><br>
         <label for="log-date-time">Date:</label><br>
         <input type="datetime-local" id="log-date-time" name="log-date-time" /><br>
         <h1>Fertilizer</h1>
@@ -51,7 +51,7 @@
         <label for="number-of-fruits">How many fruits?</label>
         <input type="number" id="number-of-fruits" name="number-of-fruits">
         <label for="images">Upload Images:</label>
-        <input type="file" id="images" name="images" multiple="multiple">
+        <input type="file" id="images" name="images[]" accept="image/png, image/jpeg" multiple><!-- We still need file verification. -->
         <button type="submit">Create Log</button>
     </form>
 </section>
