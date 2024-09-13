@@ -10,6 +10,7 @@
     <?php
     require_once(dirname(__DIR__, 2) . "/php/objects/Log.php");
     require_once(dirname(__DIR__, 2) . "/php/lib/rb.php");
+    require_once(dirname(__DIR__, 2) . "/php/constants.php");
     use Log;
 
     try {
@@ -17,49 +18,49 @@
         echo var_dump($_FILES["images"]["name"]) . "\n";
 
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
-            move_uploaded_file($tmpName, "/home/awesomepilot/plantlog/" . $_FILES["images"]["name"][$image]);
+            move_uploaded_file($tmpName, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
         }
         // Form Values
-        // echo $_GET["plantname"];
-        // echo $_GET["log-date-time"];
-        // echo $_GET["did-fertilize"];
-        // echo $_GET["fertilizer-used"];
-        // echo $_GET["fertilizer-weight"];
-        // echo $_GET["fertilizer-n"];
-        // echo $_GET["fertilizer-p"];
-        // echo $_GET["fertilizer-k"];
-        // echo $_GET["problem-name"];
-        // echo $_GET["treatable"];
-        // echo $_GET["treatments-tried"];
-        // echo $_GET["treatments-found"];
-        // echo $_GET["research"];
-        // echo $_GET["is-flowering"];
-        // echo $_GET["is-fruiting"];
-        // echo $_GET["images"];
-        // echo $_GET["number-of-fruits"];
+        // echo $_POST["plantname"];
+        // echo $_POST["log-date-time"];
+        // echo $_POST["did-fertilize"];
+        // echo $_POST["fertilizer-used"];
+        // echo $_POST["fertilizer-weight"];
+        // echo $_POST["fertilizer-n"];
+        // echo $_POST["fertilizer-p"];
+        // echo $_POST["fertilizer-k"];
+        // echo $_POST["problem-name"];
+        // echo $_POST["treatable"];
+        // echo $_POST["treatments-tried"];
+        // echo $_POST["treatments-found"];
+        // echo $_POST["research"];
+        // echo $_POST["is-flowering"];
+        // echo $_POST["is-fruiting"];
+        // echo $_POST["images"];
+        // echo $_POST["number-of-fruits"];
 
         // $npk = array(
-        //     "n" => $_GET["fertilizer-n"],
-        //     "p" => $_GET["fertilizer-p"],
-        //     "k" => $_GET["fertilizer-k"]
+        //     "n" => $_POST["fertilizer-n"],
+        //     "p" => $_POST["fertilizer-p"],
+        //     "k" => $_POST["fertilizer-k"]
         // );
 
         // $log = new Log(
-        //     $_GET["plantname"],
+        //     $_POST["plantname"],
         //     new DateTime(),
         //     30,
         //     20,
-        //     $_GET["images"],
-        //     $_GET["problem-name"],
-        //     $_GET["treatable"],
-        //     $_GET["research"],
-        //     $_GET["treatments-tried"],
-        //     $_GET["treatments-found"],
-        //     $_GET["is-flowering"],
-        //     $_GET["is-fruiting"],
-        //     $_GET["number-of-fruits"],
-        //     $_GET["fertilizer-used"],
-        //     $_GET["fertilizer-weight"],
+        //     $_POST["images"],
+        //     $_POST["problem-name"],
+        //     $_POST["treatable"],
+        //     $_POST["research"],
+        //     $_POST["treatments-tried"],
+        //     $_POST["treatments-found"],
+        //     $_POST["is-flowering"],
+        //     $_POST["is-fruiting"],
+        //     $_POST["number-of-fruits"],
+        //     $_POST["fertilizer-used"],
+        //     $_POST["fertilizer-weight"],
         //     $npk
         // );
 
