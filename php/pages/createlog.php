@@ -11,15 +11,18 @@
     require_once(dirname(__DIR__, 2) . "/php/objects/Log.php");
     require_once(dirname(__DIR__, 2) . "/php/lib/rb.php");
     require_once(dirname(__DIR__, 2) . "/php/constants.php");
-    use Log;
 
     try {
         //echo var_dump($_POST) . "\n";
-        echo var_dump($_FILES["images"]["name"]) . "\n";
+        // echo var_dump($_FILES["images"]["tmp_name"]) . "\n";
 
+        echo IMG_UPLOADS_PATH;
+        
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
+            //echo "Moved to " . IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image];
             move_uploaded_file($tmpName, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
         }
+
         // Form Values
         // echo $_POST["plantname"];
         // echo $_POST["log-date-time"];

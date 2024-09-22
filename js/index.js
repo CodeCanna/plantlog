@@ -5,11 +5,6 @@ function populateElementById(divId, contentFilePath) {
             document.getElementById(divId).innerHTML = this.responseText;
         }
     };
-    var fertilizeYes = document.getElementById("fertilize-yes");
-    var fertilizeNo = document.getElementById("fertilize-no");
-
-    console.log(fertilizeNo);
-    console.log(fertilizeYes);
     xhttp.open("GET", contentFilePath, true);
     xhttp.send();
 }

@@ -1,2 +1,6 @@
 <?php
-define("IMG_UPLOADS_PATH", "/home/".get_current_user()."/Pictures/plantlog/uploads/");
+define("IMG_UPLOADS_PATH", dirname(__DIR__) . "/uploads/");
+
+if (file_exists(IMG_UPLOADS_PATH)) {
+    echo "IT FUCKING EXISTS!!";
+}

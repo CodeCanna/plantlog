@@ -32,3 +32,5 @@ Since some plants need less fertilizer than others we need to go by the actual L
 http://localhost:8080/php/pages/createlog.php?plantname=Myster+Beans&log-date-time=2024-09-11T04%3A04&did-fertilize=false&problem-name=&research=&treatments-tried=&treatments-found=&images=plant3.jpg&images=plant2.jpg&images=plant1.jpg
 
 The above URL is inorrect as we are using the POST method the get our data from the user.  We are using $_POST and $_FILES to get data.
+
+It seems /var/www/html/uploads is owned by uid 1000, I forced changed this with sudo docker exec -u <container id> chown nobody:nobody /var/www/html/uploads
