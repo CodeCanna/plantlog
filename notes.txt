@@ -34,3 +34,5 @@ http://localhost:8080/php/pages/createlog.php?plantname=Myster+Beans&log-date-ti
 The above URL is inorrect as we are using the POST method the get our data from the user.  We are using $_POST and $_FILES to get data.
 
 It seems /var/www/html/uploads is owned by uid 1000, I forced changed this with sudo docker exec -u <container id> chown nobody:nobody /var/www/html/uploads
+
+I think I fixed the permissions problem by clearing the cache and basically deleting all docker containers wit `dockery system prune -a` and it seems work.

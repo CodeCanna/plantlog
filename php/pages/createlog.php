@@ -16,11 +16,16 @@
         //echo var_dump($_POST) . "\n";
         // echo var_dump($_FILES["images"]["tmp_name"]) . "\n";
 
+        $images = array();
+
         echo IMG_UPLOADS_PATH;
         
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
-            //echo "Moved to " . IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image];
+            // Move uploaded fies to the uploads directory
             move_uploaded_file($tmpName, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
+            // Push the image paths to the images array
+            // array_push($images, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
+            $image->array_push(IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
         }
 
         // Form Values
@@ -42,32 +47,33 @@
         // echo $_POST["images"];
         // echo $_POST["number-of-fruits"];
 
-        // $npk = array(
-        //     "n" => $_POST["fertilizer-n"],
-        //     "p" => $_POST["fertilizer-p"],
-        //     "k" => $_POST["fertilizer-k"]
-        // );
+        $npk = array(
+            "n" => $_POST["fertilizer-n"],
+            "p" => $_POST["fertilizer-p"],
+            "k" => $_POST["fertilizer-k"]
+        );
 
-        // $log = new Log(
-        //     $_POST["plantname"],
-        //     new DateTime(),
-        //     30,
-        //     20,
-        //     $_POST["images"],
-        //     $_POST["problem-name"],
-        //     $_POST["treatable"],
-        //     $_POST["research"],
-        //     $_POST["treatments-tried"],
-        //     $_POST["treatments-found"],
-        //     $_POST["is-flowering"],
-        //     $_POST["is-fruiting"],
-        //     $_POST["number-of-fruits"],
-        //     $_POST["fertilizer-used"],
-        //     $_POST["fertilizer-weight"],
-        //     $npk
-        // );
+        // Create a new log object with the above data
+        $log = new Log(
+            $_POST["plantname"],
+            $_POST["log-date-time"],
+            $_POST["did-fertilize"],
+            45,
+            $images,
+            $_POST["problem-name"],
+            $_POST["treatable"],
+            $_POST["research"],
+            $_POST["treatments-tried"],
+            $_POST["treatments-found"],
+            $_POST["is-flowering"],
+            $_POST["is-fruiting"],
+            $_POST["number-of-fruits"],
+            $_POST["fertilizer-used"] | "None",
+            $_POST["fertiizer-weight"] | 0,
+            $npk
+        );
 
-        // echo var_dump($log);
+        echo var_dump($log);
         //R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
         //$logBean = R::dispense('log');
 
