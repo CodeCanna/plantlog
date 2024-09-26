@@ -25,7 +25,7 @@
             move_uploaded_file($tmpName, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
             // Push the image paths to the images array
             // array_push($images, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
-            $image->array_push(IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
+            array_push($images, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
         }
 
         // Form Values
@@ -47,16 +47,20 @@
         // echo $_POST["images"];
         // echo $_POST["number-of-fruits"];
 
+        // Create array with NPK values in it
         $npk = array(
             "n" => $_POST["fertilizer-n"],
             "p" => $_POST["fertilizer-p"],
             "k" => $_POST["fertilizer-k"]
         );
 
+        // Create PHP DateTime object from incoming string
+        $logDate = new DateTime($_POST["log-date-time"]);
+
         // Create a new log object with the above data
         $log = new Log(
             $_POST["plantname"],
-            $_POST["log-date-time"],
+            $logDate, // $_POST["log-date-time"],
             $_POST["did-fertilize"],
             45,
             $images,
