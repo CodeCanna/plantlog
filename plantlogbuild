@@ -2,7 +2,7 @@
 
 set -o posix;
 
-BUILD_PATH="/home/awesomepilot/programming/docker/docker-php-nginx";
+BUILD_PATH="";
 
 function run_image {
     if ! docker run -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
