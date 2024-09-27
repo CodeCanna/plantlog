@@ -29,23 +29,23 @@
         }
 
         // Form Values
-        // echo $_POST["plantname"];
-        // echo $_POST["log-date-time"];
-        // echo $_POST["did-fertilize"];
-        // echo $_POST["fertilizer-used"];
-        // echo $_POST["fertilizer-weight"];
-        // echo $_POST["fertilizer-n"];
-        // echo $_POST["fertilizer-p"];
-        // echo $_POST["fertilizer-k"];
-        // echo $_POST["problem-name"];
-        // echo $_POST["treatable"];
-        // echo $_POST["treatments-tried"];
-        // echo $_POST["treatments-found"];
-        // echo $_POST["research"];
-        // echo $_POST["is-flowering"];
-        // echo $_POST["is-fruiting"];
-        // echo $_POST["images"];
-        // echo $_POST["number-of-fruits"];
+        echo $_POST["plantname"] . "<br>";
+        echo $_POST["log-date-time"] . "<br>";
+        echo $_POST["did-fertilize"] . "<br>";
+        echo $_POST["fertilizer-used"] . "<br>";
+        echo $_POST["fertilizer-weight"] . "<br>";
+        echo $_POST["fertilizer-n"] . "<br>";
+        echo $_POST["fertilizer-p"] . "<br>";
+        echo $_POST["fertilizer-k"] . "<br>";
+        echo $_POST["problem-name"] . "<br>";
+        echo $_POST["treatable"] . "<br>";
+        echo $_POST["treatments-tried"] . "<br>";
+        echo $_POST["treatments-found"] . "<br>";
+        echo $_POST["research"] . "<br>";
+        echo $_POST["is-flowering"] . "<br>";
+        echo $_POST["is-fruiting"] . "<br>";
+        echo $_POST["images"] . "<br>";
+        echo $_POST["number-of-fruits"] . "<br>";
 
         // Create array with NPK values in it
         $npk = array(
