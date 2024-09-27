@@ -39,15 +39,13 @@ function quick_rebuild {
 
 # Full Rebuild: rebuild the entire docker system including clearing caches
 function full_rebuild {
-    echo "Full Rebuild";
+    echo "Full rebuild of $1";
     echo "Stopping container $1";
     docker stop $1;
     echo "rebuilding container";
     docker build --no-cache -t my_server $BUILD_PATH;
     echo "Starting server!";
     docker run -d -p 80:8080 my_server;
-    echo "Failed to start server...";
-    exit 1;
     echo "Server should be up at http://localhost";
 }
 
