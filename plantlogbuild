@@ -2,6 +2,10 @@
 set -o posix;
 BUILD_PATH="./";
 
+function logging_mode {
+    sudo docker run -p 80:8080 my_server;
+}
+
 # Builds the docker image
 function build {
     if ! sudo docker build -t my_server $BUILD_PATH; then
@@ -29,10 +33,7 @@ function quick_rebuild {
     echo "Building new container";
     sudo docker build -t my_server $BUILD_PATH;
     echo "Starting server!";
-    if ! sudo docker run -d -p 80:8080 my_server; then
-        echo "Failed to start server, after quick rebuild, exiting...";
-        exit 1;
-    fi
+    sudo docker run -d -p 80:8080 my_server; then
     echo "Server should be up at http://localhost";
 }
 
@@ -44,10 +45,9 @@ function full_rebuild {
     echo "rebuilding container";
     sudo docker build --no-cache -t my_server $BUILD_PATH;
     echo "Starting server!";
-    if ! sudo docker run -d -p 80:8080 my_server; then
-        echo "Failed to start server...";
-        exit 1;
-    fi
+    sudo docker run -d -p 80:8080 my_server; then
+    echo "Failed to start server...";
+    exit 1;
     echo "Server should be up at http://localhost";
 }
 
@@ -63,12 +63,13 @@ function show_help {
     echo "+----------------------------------------------------------------------+";
 }
 
-while getopts "q:f:brh" arg; do
+while getopts "q:f:blrh" arg; do
     case "$arg" in
         b) build;;
         q) quick_rebuild ${OPTARG};;
         f) full_rebuild ${OPTARG};;
         r) run_image;;
+        l) logging_mode;;
         h) show_help;;
         ?) show_help;;
         *) echo "Something went wront, exiting....";;
