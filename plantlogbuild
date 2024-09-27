@@ -33,7 +33,7 @@ function quick_rebuild {
     echo "Building new container";
     sudo docker build -t my_server $BUILD_PATH;
     echo "Starting server!";
-    sudo docker run -d -p 80:8080 my_server; then
+    sudo docker run -d -p 80:8080 my_server;
     echo "Server should be up at http://localhost";
 }
 
@@ -45,7 +45,7 @@ function full_rebuild {
     echo "rebuilding container";
     sudo docker build --no-cache -t my_server $BUILD_PATH;
     echo "Starting server!";
-    sudo docker run -d -p 80:8080 my_server; then
+    sudo docker run -d -p 80:8080 my_server;
     echo "Failed to start server...";
     exit 1;
     echo "Server should be up at http://localhost";
