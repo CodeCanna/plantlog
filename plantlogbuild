@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -o posix;
-BUILD_PATH="/home/awesomepilot/programming/docker/docker-php-nginx";
+BUILD_PATH="./";
 CONTAINER_ID=$(sudo docker ps -aqf "name=my_server");
 
 # Builds the docker image
@@ -13,7 +13,7 @@ function build {
 
 # Rus the plantlog docker image
 function run_image {
-    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+    if ! sudo docker run -d -p 80:8080 my_server; then
         echo "Couldn't start the server, exiting...";
         exit 1;
     fi
@@ -22,7 +22,7 @@ function run_image {
 
 # Quick rebuild: just rebuild the container
 function quick_rebuild {
-    echo "Quick Rebuild of container $(sudo docker ps -aqf "name=my_server")";
+    echo "Quick Rebuild of container $1";
     echo "Stopping container $1";
     sudo docker stop $1;
     echo "Deleting old container $1";
@@ -30,7 +30,7 @@ function quick_rebuild {
     echo "Building new container";
     sudo docker build -t my_server $BUILD_PATH;
     echo "Starting server!";
-    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+    if ! sudo docker run -d -p 80:8080 my_server; then
         echo "Failed to start server, after quick rebuild, exiting...";
         exit 1;
     fi
@@ -45,7 +45,7 @@ function full_rebuild {
     echo "rebuilding container";
     sudo docker build --no-cache -t my_server $BUILD_PATH;
     echo "Starting server!";
-    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+    if ! sudo docker run -d -p 80:8080 my_server; then
         echo "Failed to start server...";
         exit 1;
     fi
