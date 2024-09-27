@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -o posix;
 BUILD_PATH="./";
-CONTAINER_ID=$(sudo docker ps -aqf "name=my_server");
 
 # Builds the docker image
 function build {
@@ -53,15 +52,15 @@ function full_rebuild {
 }
 
 function show_help {
-    echo "+-------------------------------------------------------+";
-    echo "|             Plantlog build helper script              |";
-    echo "+-------------------------------------------------------+";
-    echo "|            -b - Just build the image                  |";
-    echo "|            -q - Quick rebuild the image               |";
-    echo "|            -f - Full rebuild with --no-cache          |";
-    echo "|            -r - Run the plantlog docker image         |";
-    echo "|            -h - Print this help message then exit     |";
-    echo "+-------------------------------------------------------+";
+    echo "+----------------------------------------------------------------------+";
+    echo "|                     Plantlog build helper script                     |";
+    echo "+----------------------------------------------------------------------+";
+    echo "|            -b - Just build the image                                 |";
+    echo "|            -q [container id] - Quick rebuild the image               |";
+    echo "|            -f [container id] - Full rebuild with --no-cache          |";
+    echo "|            -r - Run the plantlog docker image                        |";
+    echo "|            -h - Print this help message then exit                    |";
+    echo "+----------------------------------------------------------------------+";
 }
 
 while getopts "q:f:brh" arg; do
