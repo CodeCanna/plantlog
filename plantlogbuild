@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -o posix;
+BUILD_PATH="/home/awesomepilot/programming/docker/docker-php-nginx";
+CONTAINER_ID=$(sudo docker ps -aqf "name=my_server");
+
+# Builds the docker image
+function build {
+    if ! sudo docker build -t my_server $BUILD_PATH; then
+        echo "Unable to build docker container in $BUILD_PATH";
+    fi
+    echo "Successfully built docker container";
+}
+
+# Rus the plantlog docker image
+function run_image {
+    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+        echo "Couldn't start the server, exiting...";
+        exit 1;
+    fi
+    echo "Docker image started, should be live at http://localhost";
+}
+
+# Quick rebuild: just rebuild the container
+function quick_rebuild {
+    echo "Quick Rebuild of container $(sudo docker ps -aqf "name=my_server")";
+    echo "Stopping container $1";
+    sudo docker stop $1;
+    echo "Deleting old container $1";
+    sudo docker rmi -f $1;
+    echo "Building new container";
+    sudo docker build -t my_server $BUILD_PATH;
+    echo "Starting server!";
+    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+        echo "Failed to start server, after quick rebuild, exiting...";
+        exit 1;
+    fi
+    echo "Server should be up at http://localhost";
+}
+
+# Full Rebuild: rebuild the entire docker system including clearing caches
+function full_rebuild {
+    echo "Full Rebuild";
+    echo "Stopping container $1";
+    sudo docker stop $1;
+    echo "rebuilding container";
+    sudo docker build --no-cache -t my_server $BUILD_PATH;
+    echo "Starting server!";
+    if ! sudo docker run -d -p 80:8080 -v ~/plantlog:/var/www/html my_server; then
+        echo "Failed to start server...";
+        exit 1;
+    fi
+    echo "Server should be up at http://localhost";
+}
+
+function show_help {
+    echo "Help!";
+    exit;
+}
+
+while getopts "q:f:brh" arg; do
+    case "$arg" in
+        b) build;;
+        q) quick_rebuild ${OPTARG};;
+        f) full_rebuild ${OPTARG};;
+        r) run_image;;
+        h) show_help;;
+        ?) show_help;;
+        *) echo "Something went wront, exiting....";;
+    esac
+done
