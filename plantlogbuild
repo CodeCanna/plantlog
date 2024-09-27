@@ -61,7 +61,7 @@ function show_help {
     echo "|            -f - Full rebuild with --no-cache          |";
     echo "|            -r - Run the plantlog docker image         |";
     echo "|            -h - Print this help message then exit     |";
-    echo "+------------------------------------------------------+";
+    echo "+-------------------------------------------------------+";
 }
 
 while getopts "q:f:brh" arg; do
