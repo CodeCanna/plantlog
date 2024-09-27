@@ -3,12 +3,12 @@ set -o posix;
 BUILD_PATH="./";
 
 function logging_mode {
-    sudo docker run -p 80:8080 my_server;
+    docker run -p 80:8080 my_server;
 }
 
 # Builds the docker image
 function build {
-    if ! sudo docker build -t my_server $BUILD_PATH; then
+    if ! docker build -t my_server $BUILD_PATH; then
         echo "Unable to build docker container in $BUILD_PATH";
     fi
     echo "Successfully built docker container";
@@ -16,7 +16,7 @@ function build {
 
 # Rus the plantlog docker image
 function run_image {
-    if ! sudo docker run -d -p 80:8080 my_server; then
+    if ! docker run -d -p 80:8080 my_server; then
         echo "Couldn't start the server, exiting...";
         exit 1;
     fi
@@ -27,13 +27,13 @@ function run_image {
 function quick_rebuild {
     echo "Quick Rebuild of container $1";
     echo "Stopping container $1";
-    sudo docker stop $1;
+    docker stop $1;
     echo "Deleting old container $1";
-    sudo docker rmi -f $1;
+    docker rmi -f $1;
     echo "Building new container";
-    sudo docker build -t my_server $BUILD_PATH;
+    docker build -t my_server $BUILD_PATH;
     echo "Starting server!";
-    sudo docker run -d -p 80:8080 my_server;
+    docker run -d -p 80:8080 my_server;
     echo "Server should be up at http://localhost";
 }
 
@@ -41,11 +41,11 @@ function quick_rebuild {
 function full_rebuild {
     echo "Full Rebuild";
     echo "Stopping container $1";
-    sudo docker stop $1;
+    docker stop $1;
     echo "rebuilding container";
-    sudo docker build --no-cache -t my_server $BUILD_PATH;
+    docker build --no-cache -t my_server $BUILD_PATH;
     echo "Starting server!";
-    sudo docker run -d -p 80:8080 my_server;
+    docker run -d -p 80:8080 my_server;
     echo "Failed to start server...";
     exit 1;
     echo "Server should be up at http://localhost";
