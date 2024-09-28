@@ -17,8 +17,6 @@
         // echo var_dump($_FILES["images"]["tmp_name"]) . "\n";
 
         $images = array();
-
-        echo IMG_UPLOADS_PATH;
         
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
             // Move uploaded fies to the uploads directory
@@ -47,37 +45,68 @@
         echo $_POST["images"] . "<br>";
         echo $_POST["number-of-fruits"] . "<br>";
 
-        // Create array with NPK values in it
-        $npk = array(
-            "n" => $_POST["fertilizer-n"],
-            "p" => $_POST["fertilizer-p"],
-            "k" => $_POST["fertilizer-k"]
+        $testLog = new Log(
+            "Pumpkin",
+            new DateTime,
+            48,
+            87,
+            array(
+                "image1" => "/path/to/image1",
+                "image2" => "/path/to/image2",
+                "image3" => "/path/to/image3"
+            ),
+            null,
+            null,
+            null,
+            null,
+            null,
+            false,
+            false,
+            0,
+            "None",
+            0,
+            array(
+                "n" => 0,
+                "p" => 0,
+                "k" => 0
+            )
         );
 
-        // Create PHP DateTime object from incoming string
-        $logDate = new DateTime($_POST["log-date-time"]);
+        var_dump($testLog);
+
+        // Create array with NPK values in it
+        // $npk = array(
+        //     "n" => $_POST["fertilizer-n"],
+        //     "p" => $_POST["fertilizer-p"],
+        //     "k" => $_POST["fertilizer-k"]
+        // );
+
+        // // Create PHP DateTime object from incoming string
+        // $logDate = new DateTime($_POST["log-date-time"]);
+
+        // echo $logDate . "<br>";
 
         // Create a new log object with the above data
-        $log = new Log(
-            $_POST["plantname"],
-            $logDate, // $_POST["log-date-time"],
-            $_POST["did-fertilize"],
-            45,
-            $images,
-            $_POST["problem-name"],
-            $_POST["treatable"],
-            $_POST["research"],
-            $_POST["treatments-tried"],
-            $_POST["treatments-found"],
-            $_POST["is-flowering"],
-            $_POST["is-fruiting"],
-            $_POST["number-of-fruits"],
-            $_POST["fertilizer-used"] | "None",
-            $_POST["fertiizer-weight"] | 0,
-            $npk
-        );
+        // $log = new Log(
+        //     $_POST["plantname"],
+        //     $logDate, // $_POST["log-date-time"],
+        //     $_POST["did-fertilize"],
+        //     45,
+        //     $images,
+        //     $_POST["problem-name"],
+        //     $_POST["treatable"],
+        //     $_POST["research"],
+        //     $_POST["treatments-tried"],
+        //     $_POST["treatments-found"],
+        //     $_POST["is-flowering"],
+        //     $_POST["is-fruiting"],
+        //     $_POST["number-of-fruits"],
+        //     $_POST["fertilizer-used"] | "None",
+        //     $_POST["fertiizer-weight"] | 0,
+        //     $npk
+        // );
 
-        echo var_dump($log);
+        // echo var_dump($log);
         //R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
         //$logBean = R::dispense('log');
 

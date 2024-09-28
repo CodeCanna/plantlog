@@ -1,13 +1,14 @@
 <?php
 require_once("Notes.php");
+require_once("Exceptions.php");
 class Log extends Notes
 {
     // public vars
-    private string $plantName = "";
+    private string $plantName;
     private DateTime $logDate; // This must be initialize in a Magic Method __construct() below
-    private int $lastCheckedDays = 0;
-    private int $lastFertilizedDays = 0;
-    private array $images = array();
+    private int $lastCheckedDays;
+    private int $lastFertilizedDays;
+    private ?array $images = null; // A questionmark before the type declaration means this is either an array or null
 
     /**
      * @param string $plantName
@@ -21,20 +22,20 @@ class Log extends Notes
         DateTime $logDate,
         int $lastCheckedDays,
         int $lastFertilizedDays,
-        array $images,
+        ?array $images,
         // Problems //
-        string $problemName,
-        bool $isTreatable,
-        string $research,
-        string $treatmentsTried,
-        string $treatmentsFound,
+        ?string $problemName,
+        ?bool $isTreatable,
+        ?string $research,
+        ?string $treatmentsTried,
+        ?string $treatmentsFound,
         // Notes //
         bool $isFlowering,
         bool $isFruiting,
         int $numberOfFruits,
-        string $fertilizerUsed,
-        float $fertilizerWeight,
-        array $npk
+        ?string $fertilizerUsed,
+        ?float $fertilizerWeight,
+        ?array $npk
     ) {
         $this->setPlantName($plantName);
         $this->setLogDate($logDate);
@@ -60,14 +61,25 @@ class Log extends Notes
     // Getters Setters //
 
     // $plantName //
-    public function getPlantName(): string
+    public function getPlantName(): string | null
     {
+        if (! isset($this->plantName)) {
+            return null;
+        }
         return $this->plantName;
     }
 
     public function setPlantName(string $plantName)
     {
-        $this->plantName = $plantName;
+        try {
+            if (isset($plantName)) {
+                $this->plantName = $plantName;
+            } else {
+                throw new PlantLogMissingValue(); // Plant name cannot be null
+            }
+        } catch (Exception $e) {
+            echo "Plantlog has encountered an error: " . $e->getMessage();
+        }
     }
 
     // $logDate //
@@ -93,11 +105,13 @@ class Log extends Notes
     }
 
     // Last Fertilized Days //
-    public function getLastFertilizedDays(): int {
+    public function getLastFertilizedDays(): int
+    {
         return $this->lastFertilizedDays;
     }
 
-    public function setLastFertilizedDays(int $lastFertilizedDays) {
+    public function setLastFertilizedDays(int $lastFertilizedDays)
+    {
         $this->lastFertilizedDays = $lastFertilizedDays;
     }
 

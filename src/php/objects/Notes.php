@@ -33,11 +33,11 @@ class Notes extends Problems
         string $fertilizerUsed,
         float $fertilizerWeight,
         array $npk,
-        string $problemName,
-        bool $isTreatable,
-        string $research,
-        string $treatmentsTried,
-        string $treatmentsFound
+        ?string $problemName,
+        ?bool $isTreatable,
+        ?string $research,
+        ?string $treatmentsTried,
+        ?string $treatmentsFound
         
     )
     {
