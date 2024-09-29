@@ -18,6 +18,7 @@
 
         $images = array();
         
+        // Construct our images array and move uploaded images to upoads folder
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
             // Move uploaded fies to the uploads directory
             move_uploaded_file($tmpName, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
@@ -27,34 +28,46 @@
         }
 
         // Form Values
-        echo $_POST["plantname"] . "<br>";
-        echo $_POST["log-date-time"] . "<br>";
-        echo $_POST["did-fertilize"] . "<br>";
-        echo $_POST["fertilizer-used"] . "<br>";
-        echo $_POST["fertilizer-weight"] . "<br>";
-        echo $_POST["fertilizer-n"] . "<br>";
-        echo $_POST["fertilizer-p"] . "<br>";
-        echo $_POST["fertilizer-k"] . "<br>";
-        echo $_POST["problem-name"] . "<br>";
-        echo $_POST["treatable"] . "<br>";
-        echo $_POST["treatments-tried"] . "<br>";
-        echo $_POST["treatments-found"] . "<br>";
-        echo $_POST["research"] . "<br>";
-        echo $_POST["is-flowering"] . "<br>";
-        echo $_POST["is-fruiting"] . "<br>";
-        echo $_POST["images"] . "<br>";
-        echo $_POST["number-of-fruits"] . "<br>";
+        // echo $_POST["plantname"] . "<br>";
+        // echo $_POST["log-date-time"] . "<br>";
+        // echo $_POST["did-fertilize"] . "<br>";
+        // echo $_POST["fertilizer-used"] . "<br>";
+        // echo $_POST["fertilizer-weight"] . "<br>";
+        // echo $_POST["fertilizer-n"] . "<br>";
+        // echo $_POST["fertilizer-p"] . "<br>";
+        // echo $_POST["fertilizer-k"] . "<br>";
+        // echo $_POST["problem-name"] . "<br>";
+        // echo $_POST["treatable"] . "<br>";
+        // echo $_POST["treatments-tried"] . "<br>";
+        // echo $_POST["treatments-found"] . "<br>";
+        // echo $_POST["research"] . "<br>";
+        // echo $_POST["is-flowering"] . "<br>";
+        // echo $_POST["is-fruiting"] . "<br>";
+        // echo $_POST["images"] . "<br>";
+        // echo $_POST["number-of-fruits"] . "<br>";
+
+        // Construct our NPK array
+        $npk;
+        if ($_POST["did-fertilize"] === "true") {
+            $npk = array(
+                "n" => $_POST["fertilizer-n"],
+                "p" => $_POST["fertilizer-p"],
+                "k" => $_POST["fertilizer-k"]
+            );
+        } else {
+            $npk = null;
+        }
+        
+        // Create our datetime object from the given string
+        $dt = DateTime::createFromFormat("m-d-Y h:i:s", $_POST["log-date-time"]);
+        echo "Date: ". $_POST["log-date-time"];
 
         $testLog = new Log(
-            "Pumpkin",
+            $_POST["plantname"],
             new DateTime,
             48,
             87,
-            array(
-                "image1" => "/path/to/image1",
-                "image2" => "/path/to/image2",
-                "image3" => "/path/to/image3"
-            ),
+            $images,
             null,
             null,
             null,
@@ -72,7 +85,7 @@
             )
         );
 
-        var_dump($testLog);
+        
 
         // Create array with NPK values in it
         // $npk = array(
