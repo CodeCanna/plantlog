@@ -5,7 +5,7 @@ class Notes extends Problems
     protected bool $isFlowering = false;
     protected bool $isFruiting = false;
     protected int $numberOfFruits = 0;
-    protected string $fertilizerUsed = "";
+    protected string $fertilizerUsed;
     protected float $fertilizerWeight = 0.0; // Weight
     protected array $npk = array(
         "n" => 0.0,
