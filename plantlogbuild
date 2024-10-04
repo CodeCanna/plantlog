@@ -4,12 +4,12 @@ BUILD_PATH="./";
 
 # Run container in logging mode where the output is seen on the console
 function logging_mode {
-    docker run -p 80:8080 $1;
+    docker run -p 80:8080 "$1";
 }
 
 # Builds the docker image
 function build {
-    if ! docker build -t $1 $BUILD_PATH; then
+    if ! docker build -t "$1" "$BUILD_PATH"; then
         echo "Unable to build docker container in $BUILD_PATH";
     fi
     echo "Successfully built docker container";
@@ -17,7 +17,7 @@ function build {
 
 # Rus the plantlog docker image
 function run_image {
-    if ! docker run -d -p 80:8080 $1; then
+    if ! docker run -d -p 80:8080 "$1"; then
         echo "Couldn't start the server $1, exiting...";
         exit 1;
     fi
@@ -26,30 +26,29 @@ function run_image {
 
 # Quick rebuild: just rebuild the container
 function quick_rebuild {
-    container_id=$(docker images -q $1);
+    container_id=$(docker images -q "$1");
     echo "Quick Rebuild of image $1";
     echo "Stopping container $container_id";
-    docker stop $container_id;
+    docker stop "$container_id";
     echo "Deleting old container $container_id";
-    docker rmi -f $container_id;
+    docker rmi -f "$container_id";
     echo "Building new container";
-    docker build -t $1 $BUILD_PATH;
+    docker build -t "$1" "$BUILD_PATH";
     echo "Starting server!";
-    docker run -d -p 80:8080 $1;
+    docker run -d -p 80:8080 "$1";
     echo "Server should be up at http://localhost";
 }
 
 # Full Rebuild: rebuild the entire docker system including clearing caches
 function full_rebuild {
-    container_id=$(docker images -q $1);
-    echo $container_id;
+    container_id=$(docker images -q "$1");
     echo "Full rebuild of image $1";
     echo "Stopping container $container_id";
-    docker stop $container_id;
+    docker stop "$container_id";
     echo "Rebuilding image $1";
-    docker build --no-cache -t $1 $BUILD_PATH;
+    docker build --no-cache -t "$1" "$BUILD_PATH";
     echo "Starting server!";
-    docker run -d -p 80:8080 $1;
+    docker run -d -p 80:8080 "$1";
     echo "Server should be up at http://localhost";
 }
 
@@ -69,11 +68,11 @@ function show_help {
 # Process arguments
 while getopts "q:f:b:l:r:h" arg; do
     case "$arg" in
-        b) build ${OPTARG};;
-        q) quick_rebuild ${OPTARG};;
-        f) full_rebuild ${OPTARG};;
-        r) run_image ${OPTARG};;
-        l) logging_mode ${OPTARG};;
+        b) build "${OPTARG}";;
+        q) quick_rebuild "${OPTARG}";;
+        f) full_rebuild "${OPTARG}";;
+        r) run_image "${OPTARG}";;
+        l) logging_mode "${OPTARG}";;
         h) show_help;;
         ?) show_help;;
         *) echo "Something went wront, exiting....";;
