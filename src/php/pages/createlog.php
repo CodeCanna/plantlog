@@ -59,7 +59,7 @@
         }
         
         // Create our datetime object from the given string
-        $dt = DateTime::createFromFormat("m-d-Y h:i:s", $_POST["log-date-time"]);
+        // $dt = DateTime::createFromFormat("m-d-Y h:i:s", $_POST["log-date-time"]);
         echo "Date: ". $_POST["log-date-time"];
 
         $testLog = new Log(
