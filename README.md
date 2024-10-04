@@ -1,4 +1,4 @@
-A simple ways for me to keep track of what's happening with my plants.
+A simple ways for me to keep track of what's happening with my plants.  This project is built on this docker image: https://github.com/TrafeX/docker-php-nginx
 
 ## Usage
 

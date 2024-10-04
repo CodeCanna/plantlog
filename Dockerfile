@@ -1,7 +1,7 @@
 ARG ALPINE_VERSION=3.20
 FROM alpine:${ALPINE_VERSION}
 LABEL Maintainer="Mark Allen Waid Jr <mark.waid94@gmail.com>"
-LABEL Description="A web app to log my plants built on top of a lightweight container with Nginx 1.26 & PHP 8.3 based on Alpine Linux."
+LABEL Description="A web app to log my plants built on top of a lightweight container with Nginx 1.26 & PHP 8.3 based on Alpine Linux, and this repo: https://github.com/TrafeX/docker-php-nginx"
 # Setup document root
 WORKDIR /var/www/html
 
