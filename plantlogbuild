@@ -2,6 +2,7 @@
 set -o posix;
 BUILD_PATH="./";
 
+# Run container in logging mode where the output is seen on the console
 function logging_mode {
     docker run -p 80:8080 $1;
 }
@@ -52,6 +53,7 @@ function full_rebuild {
     echo "Server should be up at http://localhost";
 }
 
+# Display a Help Message
 function show_help {
     echo "+----------------------------------------------------------------------+";
     echo "|                     Plantlog build helper script                     |";
@@ -64,6 +66,7 @@ function show_help {
     echo "+----------------------------------------------------------------------+";
 }
 
+# Process arguments
 while getopts "q:f:b:l:r:h" arg; do
     case "$arg" in
         b) build ${OPTARG};;
