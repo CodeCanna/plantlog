@@ -3,9 +3,9 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/mvp.css?version=51" />
+    <link rel="stylesheet" type="text/css" href="/css/index.css?version=51" />
     <title>Plant Log</title>
-    <link rel="stylesheet" href="/css/mvp.css" />
-    <link rel="stylesheet" href="/css/index.css" />
 </head>
 
 <body>

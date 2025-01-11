@@ -61,7 +61,7 @@ article aside {
 
 body {
     /* background: var(--color-bg); */
-    background: url("/assets/images/photo_2024-09-13_15-12-39.jpg");
+    background: url("../assets/images/background_image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     color: var(--color-text);
