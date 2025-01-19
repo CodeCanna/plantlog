@@ -32,7 +32,7 @@ class Notes extends Problems
         int $numberOfFruits,
         string $fertilizerUsed,
         float $fertilizerWeight,
-        array $npk,
+        ?array $npk,
         ?string $problemName,
         ?bool $isTreatable,
         ?string $research,

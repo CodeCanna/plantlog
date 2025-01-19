@@ -13,10 +13,9 @@
     require_once(dirname(__DIR__, 2) . "/php/constants.php");
 
     try {
-        //echo var_dump($_POST) . "\n";
-        // echo var_dump($_FILES["images"]["tmp_name"]) . "\n";
-
         $images = array();
+
+        // var_dump($_FILES);
         
         // Construct our images array and move uploaded images to upoads folder
         foreach ($_FILES["images"]["tmp_name"] as $image => $tmpName) {
@@ -26,6 +25,19 @@
             // array_push($images, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
             array_push($images, IMG_UPLOADS_PATH . $_FILES["images"]["name"][$image]);
         }
+
+        // Construct our NPK array
+        if ($_POST["did-fertilize"] === "true") {
+            $npk = array(
+                "n" => $_POST["fertilizer-n"],
+                "p" => $_POST["fertilizer-p"],
+                "k" => $_POST["fertilizer-k"]
+            );
+            echo("You fertilized your plants");
+        }        
+
+        R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
+        $logBean = R::dispense('log');
 
         // Form Values
         // echo $_POST["plantname"] . "<br>";
@@ -46,98 +58,68 @@
         // echo $_POST["images"] . "<br>";
         // echo $_POST["number-of-fruits"] . "<br>";
 
-        // Construct our NPK array
-        $npk;
-        if ($_POST["did-fertilize"] === "true") {
-            $npk = array(
-                "n" => $_POST["fertilizer-n"],
-                "p" => $_POST["fertilizer-p"],
-                "k" => $_POST["fertilizer-k"]
-            );
-        } else {
-            $npk = null;
-        }
-        
-        // Create our datetime object from the given string
-        // $dt = DateTime::createFromFormat("m-d-Y h:i:s", $_POST["log-date-time"]);
-        echo "Date: ". $_POST["log-date-time"];
+        // string $plantName,
+        // DateTime $logDate,
+        // int $lastCheckedDays,
+        // int $lastFertilizedDays,
+        // ?array $images,
+        // // Problems //
+        // ?string $problemName,
+        // ?bool $isTreatable,
+        // ?string $research,
+        // ?string $treatmentsTried,
+        // ?string $treatmentsFound,
+        // // Problems $problems,
+        // // Notes //
+        // bool $isFlowering,
+        // bool $isFruiting,
+        // int $numberOfFruits,
+        // ?string $fertilizerUsed,
+        // ?float $fertilizerWeight,
+        // ?array $npk
 
-        $testLog = new Log(
+        // $lcds = R::find('log', 'lastCheckedDays');
+
+        $log = new Log(
             $_POST["plantname"],
-            new DateTime,
-            48,
-            87,
+            new DateTime(),
+            10,
+            20,
             $images,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false,
-            false,
-            0,
-            "None",
-            0,
+            $_POST["problem-name"],
+            $_POST["treatable"],
+            $_POST["research"],
+            $_POST["treatments-tried"],
+            $_POST["treatments-found"],
+            $_POST["is-flowering"],
+            $_POST["is-fruiting"],
+            $_POST["number-of-fruits"],
+            $_POST["fertilizer-used"],
+            $_POST["fertilizer-weight"],
             $npk
         );
 
-        
-
-        // Create array with NPK values in it
-        // $npk = array(
-        //     "n" => $_POST["fertilizer-n"],
-        //     "p" => $_POST["fertilizer-p"],
-        //     "k" => $_POST["fertilizer-k"]
-        // );
-
-        // // Create PHP DateTime object from incoming string
-        // $logDate = new DateTime($_POST["log-date-time"]);
-
-        // echo $logDate . "<br>";
-
-        // Create a new log object with the above data
-        // $log = new Log(
-        //     $_POST["plantname"],
-        //     $logDate, // $_POST["log-date-time"],
-        //     $_POST["did-fertilize"],
-        //     45,
-        //     $images,
-        //     $_POST["problem-name"],
-        //     $_POST["treatable"],
-        //     $_POST["research"],
-        //     $_POST["treatments-tried"],
-        //     $_POST["treatments-found"],
-        //     $_POST["is-flowering"],
-        //     $_POST["is-fruiting"],
-        //     $_POST["number-of-fruits"],
-        //     $_POST["fertilizer-used"] | "None",
-        //     $_POST["fertiizer-weight"] | 0,
-        //     $npk
-        // );
-
-        // echo var_dump($log);
-        //R::setup('sqlite:/home/awesomepilot/rbdb/rb.db');
-        //$logBean = R::dispense('log');
+        var_dump($log);
 
         // Set properties
-        // $logBean->plantName = $log->getPlantName();
-        // $logBean->logDate = $log->getLogDate();
-        // $logBean->lastCheckedDays = $log->getLastCheckedDays();
-        // $logBean->lastFertilizedDays = $log->getLastFertilizedDays();
-        // $logBean->images = serialize($log->getImages());
-        // $logBean->problemName = $log->getProblemName();
-        // $logBean->isTreatable = $log->getIsTreatable();
-        // $logBean->research = $log->getResearch();
-        // $logBean->treatmentsTried = $log->getTreatmentsTried();
-        // $logBean->treatmentsFound = $log->getTreatmentsFound();
-        // $logBean->isFlowering = $log->getIsFlowering();
-        // $logBean->isFruiting = $log->getIsFruiting();
-        // $logBean->numberOfFruits = $log->getNumberOfFruits();
-        // $logBean->fertilizerUsed = $log->getFertilizerUsed();
-        // $logBean->fertilizerWeight = $log->getFertilizerWeight();
-        // $logBean->npk = serialize($log->getNPK());
+        $logBean->plantName = $log->getPlantName();
+        $logBean->logDate = $log->getLogDate();
+        $logBean->lastCheckedDays = $log->getLastCheckedDays();
+        $logBean->lastFertilizedDays = $log->getLastFertilizedDays();
+        $logBean->images = serialize($log->getImages());
+        $logBean->problemName = $log->getProblemName();
+        $logBean->isTreatable = $log->getIsTreatable();
+        $logBean->research = $log->getResearch();
+        $logBean->treatmentsTried = $log->getTreatmentsTried();
+        $logBean->treatmentsFound = $log->getTreatmentsFound();
+        $logBean->isFlowering = $log->getIsFlowering();
+        $logBean->isFruiting = $log->getIsFruiting();
+        $logBean->numberOfFruits = $log->getNumberOfFruits();
+        $logBean->fertilizerUsed = $log->getFertilizerUsed();
+        $logBean->fertilizerWeight = $log->getFertilizerWeight();
+        $logBean->npk = serialize($log->getNPK());
 
-        //$id = R::store($logBean);
+        $id = R::store($logBean);
     } catch (Exception $e) {
         echo $e;
     }

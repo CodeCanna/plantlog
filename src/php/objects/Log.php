@@ -1,5 +1,6 @@
 <?php
 require_once("Notes.php");
+require_once("Problems.php");
 require_once("Exceptions.php");
 class Log extends Notes
 {
@@ -29,6 +30,7 @@ class Log extends Notes
         ?string $research,
         ?string $treatmentsTried,
         ?string $treatmentsFound,
+        // Problems $problems,
         // Notes //
         bool $isFlowering,
         bool $isFruiting,
@@ -41,6 +43,7 @@ class Log extends Notes
         $this->setLogDate($logDate);
         $this->setLastCheckedDays($lastCheckedDays);
         $this->setImages($images);
+        $this->setLastFertilizedDays($lastFertilizedDays);
 
         // Notes.php constructor //
         parent::__construct(
